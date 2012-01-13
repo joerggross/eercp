@@ -3,6 +3,7 @@
  */
 package de.jgros.eercp.server.domain;
 
+import de.jgros.eercp.server.extension.hessian.RemoteRPC;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
@@ -19,6 +20,7 @@ import javax.validation.constraints.NotNull;
  * @author joerg gross
  */
 @Entity
+@RemoteRPC
 public class Person implements IUnique, Serializable {
     
     /**

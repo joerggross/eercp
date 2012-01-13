@@ -67,5 +67,13 @@
     properties which you can use check the target you are overriding in 
     nbproject/build-impl.xml file. 
 
-    -->
+   -->
+    <target name="-post-compile">
+        <mkdir dir="${build.classes.dir}/META-INF/services"/>
+        <copy todir="${build.classes.dir}/META-INF/services">
+            <fileset dir="${conf.dir}" includes="javax.enterprise.inject.spi.Extension"/>
+        </copy>
+    </target>
+       
+
 </project>

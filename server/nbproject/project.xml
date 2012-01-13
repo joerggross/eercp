@@ -14,11 +14,14 @@
                     <file>${file.reference.derbyclient.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
+                <library dirs="200">
+                    <file>${file.reference.hessian-4.0.7.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>
                 <root id="src.java.dir"/>
-                <root id="src.java2.dir"/>
             </source-roots>
             <test-roots>
                 <root id="test.src.dir"/>
