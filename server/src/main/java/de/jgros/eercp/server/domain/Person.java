@@ -7,6 +7,7 @@ import de.jgros.eercp.server.extension.hessian.RemoteRPC;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.MapsId;
@@ -27,18 +28,13 @@ public class Person implements IUnique, Serializable {
      * the unique id.
      */
     @Id
+    @Column(name="uniqueId")
     String uniqueId;
     
     /**
      * the firstname
      */
     String firstname;
-
-    /**
-     * The user role of this person
-     */
-    @OneToOne(cascade= CascadeType.ALL) @MapsId
-    User user;
     
     /**
      * the lastname.
@@ -66,6 +62,30 @@ public class Person implements IUnique, Serializable {
      */
     public String getUniqueId() {
         return uniqueId;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
     
 }
