@@ -4,6 +4,7 @@
 package de.jgros.eercp.server.service;
 
 import de.jgros.eercp.server.domain.Person;
+import de.jgros.eercp.server.extension.hessian.RemoteRPC;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -16,7 +17,8 @@ import javax.persistence.PersistenceContext;
  * @author Jörg Groß
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Stateless
+@Stateless(name="ejb/PersonService")
+@RemoteRPC(type=IPersonService.class, url="/personService")
 public class PersonService implements IPersonService {
     
     @PersistenceContext

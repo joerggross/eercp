@@ -21,7 +21,6 @@ import javax.validation.constraints.NotNull;
  * @author joerg gross
  */
 @Entity
-@RemoteRPC
 public class Person implements IUnique, Serializable {
     
     /**
