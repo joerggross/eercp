@@ -6,6 +6,8 @@ package de.jgros.eercp.server.extension.hessian;
 import de.jgros.eercp.server.extension.BeanManagerAccessor;
 import java.lang.annotation.Annotation;
 import java.util.Collection;
+import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.naming.InitialContext;
@@ -29,34 +31,48 @@ public class HessianInitializer implements ServletContextListener {
 
         BeanManagerAccessor accessor = new BeanManagerAccessor();
 
-        HessianExtension hessianExtension = accessor.getReference(HessianExtension.class);
-        Collection<AnnotatedType> annotatedTypes = hessianExtension.getAnnotatedTypes();
+        RemoteCallableDiscoveryExtension hessianExtension = accessor.getReference(RemoteCallableDiscoveryExtension.class);
+        Collection<AnnotatedType> annotatedTypes = hessianExtension.getRemoteCallableAnnotatedTypes();
 
         for (AnnotatedType annoType : annotatedTypes) {
 
-            RemoteRPC anno = annoType.getAnnotation(RemoteRPC.class);
+            RemoteCallable anno = annoType.getAnnotation(RemoteCallable.class);
             Class iface = anno.type();
             String url = anno.url();
             Class implClass = annoType.getJavaClass();
 
-            //      Object instance = accessor.getReference(implClass);
+            boolean stateless = annoType.getAnnotation(Stateless.class) == null ? false : true;
+            boolean statefull = annoType.getAnnotation(Stateful.class) == null ? false : true;
+            System.out.println("**  Interface:" + iface);
+            System.out.println("**  Url:      " + url);
+
+            Object instance = null;
+            if (stateless || statefull) {
+                try {
+                    InitialContext ctx = new InitialContext();
+                    System.out.println(sce.getServletContext().getContextPath());
+                    instance = ctx.lookup("java:app/eercp.server/ejb/PersonService");
+                } catch (Exception ex) {
+                    // TODO log error
+                    System.out.println(ex);
+                }
+            } else {
+                try {
+                    instance = accessor.getReference(implClass);
+                } catch (Exception ex) {
+                    // TODO log error
+                    System.out.println(ex);
+                }
+            }
 
             // TODO: if this fails try to resolve instance from jndi?
 
-            System.out.println("**  Interface:" + iface);
-            System.out.println("**  Url:      " + url);
-            //    System.out.println("**  Instance: " + instance);
+            System.out.println(instance);
+            //        sce.getServletContext().addServlet(iface.getName(), null);
 
-            //  javax.ejb.EJB
         }
 
-        try {
-            InitialContext ctx = new InitialContext();
-            Object obj = ctx.lookup("java:app/eercp.server/ejb/PersonService");
-            System.out.println(obj);
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
+
 
     }
 }

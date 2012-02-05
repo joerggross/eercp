@@ -3,7 +3,7 @@
  */
 package de.jgros.eercp.server.domain;
 
-import de.jgros.eercp.server.extension.hessian.RemoteRPC;
+import de.jgros.eercp.server.extension.hessian.RemoteCallable;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
