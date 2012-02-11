@@ -17,7 +17,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
+ * Tests the remote access of the person ejb using hessian client.
+ * <p>
  * @author Jörg Groß
  */
 public class RemotePersonServiceTest {
@@ -38,6 +39,11 @@ public class RemotePersonServiceTest {
     public static void tearDownClass() throws Exception {
     }
     
+    /**
+     * Retrieve remote bean reference.
+     * <p>
+     * @throws MalformedURLException 
+     */
     @Before
     public void setUp() throws MalformedURLException {
         
@@ -48,36 +54,12 @@ public class RemotePersonServiceTest {
         
         this.domainFactory = new DomainFactory();
         domainFactory.setIdGenerator(new IDGenerator());
-        
     }
     
     @After
     public void tearDown() {
     }
 
-    /**
-     * Test of delete method, of class RemotePersonService.
-     */
-    @Test
-    public void testDelete_Person() {
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of delete method, of class RemotePersonService.
-     */
-    @Test
-    public void testDelete_String() {
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of get method, of class RemotePersonService.
-     */
-    @Test
-    public void testGet() {
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of update method, of class RemotePersonService.
@@ -87,10 +69,11 @@ public class RemotePersonServiceTest {
         
         Person person = this.domainFactory.createDomainInstance(Person.class);
         
-        person.setFirstname("Jörg");
-        person.setLastname("Groß");
+        person.setFirstname("Jörg2");
+        person.setLastname("Groß2");
         
         person = this.remotePersonService.update(person);
+        
         
         
         

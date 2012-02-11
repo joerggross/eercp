@@ -1,12 +1,10 @@
 /*
  * Copyright by Jörg Groß.
  */
-package de.jgros.eercp.server.extension.hessian;
+package de.jgros.eercp.remote.hessian;
 
 import com.caucho.hessian.server.HessianServlet;
 import java.lang.reflect.Method;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javassist.util.proxy.MethodFilter;
 import javassist.util.proxy.MethodHandler;
 import javassist.util.proxy.ProxyFactory;

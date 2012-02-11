@@ -3,9 +3,8 @@
  */
 package de.jgros.eercp.server.service;
 
+import de.jgros.eercp.remote.hessian.RemoteCallable;
 import de.jgros.eercp.server.domain.Person;
-import de.jgros.eercp.server.extension.hessian.RemoteCallable;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;

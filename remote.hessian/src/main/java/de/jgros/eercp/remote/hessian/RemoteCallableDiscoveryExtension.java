@@ -1,12 +1,13 @@
-package de.jgros.eercp.server.extension.hessian;
+/*
+ * Copyright by Jörg Groß.
+ */
+package de.jgros.eercp.remote.hessian;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AnnotatedType;
-import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 
@@ -26,7 +27,11 @@ public class RemoteCallableDiscoveryExtension implements Extension {
     private Collection<AnnotatedType> annotatedTypes = new ArrayList<AnnotatedType>();
 
     /**
-     * Observes all annotated types. 
+     * {@inheritDoc }
+     * <p>
+     * Retrieves all {@link RemoteCallable} beans and adds them to the internal
+     * state. After CDI processing is done all such beans are provided
+     * by {@link RemoteCallableDiscoveryExtension#getRemoteCallableAnnotatedTypes() }.
      */
      <T> void processAnnotatedType(@Observes ProcessAnnotatedType<T> pat) {
 
@@ -36,12 +41,13 @@ public class RemoteCallableDiscoveryExtension implements Extension {
 
         if (anno != null) {
             annotatedTypes.add(type);
+            System.out.println(type);
         }
     }
 
-     /**
-      * {@inheritDoc }
-      */
+    /**
+     * {@inheritDoc }
+     */
     @Override
     public String toString() {
         return super.toString() + ":" + this.annotatedTypes.toString();
@@ -54,6 +60,4 @@ public class RemoteCallableDiscoveryExtension implements Extension {
     public Collection<AnnotatedType> getRemoteCallableAnnotatedTypes() {
         return annotatedTypes;
     }
-    
-    
 }

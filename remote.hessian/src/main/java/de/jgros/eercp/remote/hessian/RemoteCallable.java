@@ -1,4 +1,7 @@
-package de.jgros.eercp.server.extension.hessian;
+/*
+ * Copyright by Jörg Groß.
+ */
+package de.jgros.eercp.remote.hessian;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -1,7 +1,7 @@
 /*
  * Copyright by Jörg Groß.
  */
-package de.jgros.eercp.server.extension.hessian;
+package de.jgros.eercp.remote.hessian;
 
 import org.junit.Assert;
 import org.junit.After;
@@ -77,7 +77,7 @@ public class ExtendedHessianServletProxyTest {
         TestBusinessImpl anImplementor = new TestBusinessImpl();
         ITestBusiness testImpl = (ITestBusiness) ExtendedHessianServletProxy.createProxy(anInterfaceToImplement, anImplementor);
         
-        testImpl.setFoo("Hello");;
+        testImpl.setFoo("Hello");
         Assert.assertEquals("Hello", anImplementor.getFoo());
     }
 }
